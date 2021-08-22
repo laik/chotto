@@ -94,3 +94,17 @@ export default function (props: Props) {
 	);
 }
 
+export const CascadeSelectSetting = {
+		text: '级联组件',
+		name: 'cascadeSelect',
+		schema: {
+			title: '级联组件',
+			type: 'string',
+			widget: 'CascadeSelect',
+		},
+		setting: {
+			searchBy: { title: '关联组件id', type: 'string' },
+			affectTo: { title: '影响的组件id', type: 'string' },
+			fetchUrl: { title: '请求地址', type: 'string' },
+		},
+	}

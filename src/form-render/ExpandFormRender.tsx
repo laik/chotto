@@ -1,7 +1,5 @@
-import React from 'react';
-import FormRender, { useForm } from 'form-render';
-import CascadeSelect from '../widgets/CascadeSelect';
-import RemoteDataSelect from '../widgets/RemoteDataSelect';
+import FormRender from 'form-render';
+import { widgets } from "../settings";
 
 type Props = {
 	onFinish?: (formData: any) => void;
@@ -10,6 +8,7 @@ type Props = {
 };
 
 export function ExpandFormRender(props: Props) {
+	console.log('schema', props.schema);
 	return (
 		<FormRender
 			schema={props.schema}
@@ -17,7 +16,7 @@ export function ExpandFormRender(props: Props) {
 			onFinish={(formData: any) => {
 				props.onFinish && props.onFinish(formData);
 			}}
-			widgets={{ CascadeSelect, RemoteDataSelect }}
+			widgets={widgets}
 		/>
 	);
 }

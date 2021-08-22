@@ -67,3 +67,17 @@ const RemoteDataSelect = (props: any) => {
 };
 
 export default RemoteDataSelect;
+
+export const RemoteDataSelectSetting = {
+	text: '服务端下拉选框',
+	name: 'asyncSelect',
+	schema: {
+		title: '服务端下拉',
+		type: 'string',
+		widget: 'RemoteDataSelect',
+	},
+	setting: {
+		affectTo: { title: '影响的组件id', type: 'string' },
+		fetchUrl: { title: '请求地址', type: 'string' },
+	},
+}

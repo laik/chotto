@@ -1,22 +1,9 @@
-import React, { useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Generator from 'fr-generator';
-import { Modal, Button } from 'antd';
-// fr-generator 1.0 未提交声明文件 等待 fr-generator 更新
-// import {
-// 	defaultSettings,
-// 	defaultCommonSettings,
-// 	defaultGlobalSettings,
-// } from 'fr-generator';
-import {
-	defaultSettings,
-	defaultCommonSettings,
-	defaultGlobalSettings,
-} from './settings';
-import { useRef, useState } from 'react';
-import RemoteDataSelect from '../widgets/RemoteDataSelect';
-import CascadeSelect from '../widgets/CascadeSelect';
+import { Modal } from 'antd';
 import { useForm } from 'form-render';
 import { ExpandFormRender } from '../form-render/ExpandFormRender';
+import { commonSettings, concatD, widgets } from '../settings';
 
 // const defaultValue = {
 // 	schema: {
@@ -79,55 +66,17 @@ export function SchemaGenerator(props: Props) {
 	const genRef: any = useRef();
 	const formRef = useForm();
 
-	let settings: any = [
-		{
-			title: '自定义开发配置',
-			widgets: [
-				{
-					text: '服务端下拉选框',
-					name: 'asyncSelect',
-					schema: {
-						title: '服务端下拉',
-						type: 'string',
-						'ui:widget': 'RemoteDataSelect',
-					},
-					widget: 'RemoteDataSelect',
-					setting: {
-						affectTo: { title: '影响的组件id', type: 'string'},
-						fetchUrl: { title: '请求地址', type: 'string' },
-					},
-				},
-				{
-					text: '级联组件',
-					name: 'cascadeSelect',
-					schema: {
-						title: '级联组件',
-						type: 'string',
-						'ui:widget': 'CascadeSelect',
-					},
-					widget: 'CascadeSelect',
-					setting: {
-						searchBy: { title: '关联组件id', type: 'string' },
-						affectTo: { title: '影响的组件id', type: 'string'},
-						fetchUrl: { title: '请求地址', type: 'string' },
-					},
-				}
-			],
-		},
-	];
-
 	// useEffect(() => {
 	// 	if (JSON.stringify(props.schema) != '{}') {
 	// 		setSchma(props.schema);
 	// 	}
 	// }, [props.schema]);
 
-	let concatD = settings.concat(defaultSettings);
-
 	return (
 		<>
 			<Generator
-				widgets={{ RemoteDataSelect, CascadeSelect }}
+				commonSettings={commonSettings}
+				widgets={widgets}
 				// defaultValue={JSON.stringify(schema) != '{}' ? schema : defaultValue}
 				defaultValue={defaultValue}
 				settings={concatD}
@@ -164,7 +113,7 @@ export function SchemaGenerator(props: Props) {
 				onCancel={() => setEffect(false)}
 				onOk={() => formRef.submit()}>
 				<ExpandFormRender
-					schema={schema?.schema}
+					schema={schema}
 					formRef={formRef}
 					onFinish={(formData) => console.log(formData)}
 				/>
